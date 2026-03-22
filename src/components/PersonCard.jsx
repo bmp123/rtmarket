@@ -5,10 +5,10 @@ export default function PersonCard({ person }) {
   return (
     <Link
       to={`/profile/${person.id}`}
-      className="block bg-[var(--color-surface)] border border-white/10 rounded-2xl p-5 hover:border-purple-500/30 transition-all hover:scale-[1.01]"
+      className="block bg-[var(--color-surface)] border border-white/10 rounded-2xl p-5 hover:border-cyan-500/30 transition-all hover:scale-[1.01]"
     >
       <div className="flex items-start gap-4 mb-3">
-        <img src={person.avatar} alt={person.name} className="w-12 h-12 rounded-full ring-2 ring-purple-500/20" />
+        <img src={person.avatar} alt={person.name} className="w-12 h-12 rounded-full ring-2 ring-cyan-500/20" />
         <div className="flex-1 min-w-0">
           <h3 className="text-white font-bold truncate">{person.name}</h3>
           <div className="flex items-center gap-3 text-xs text-[var(--color-text-secondary)] mt-1">
@@ -41,8 +41,8 @@ export default function PersonCard({ person }) {
       </div>
 
       {person.openForCollab && person.collabRequest && (
-        <div className="bg-purple-500/10 border border-purple-500/15 rounded-xl p-3">
-          <p className="text-xs text-purple-300 leading-relaxed">💬 {person.collabRequest}</p>
+        <div className="bg-cyan-500/10 border border-cyan-500/15 rounded-xl p-3">
+          <p className="text-xs text-cyan-300 leading-relaxed">💬 {person.collabRequest}</p>
         </div>
       )}
     </Link>

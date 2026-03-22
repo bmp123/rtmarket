@@ -13,7 +13,7 @@ export default function DashboardPage() {
       {/* Stats grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: 'Мои коллабы', value: stats.proposalsSent, icon: Users, color: 'text-purple-400' },
+          { label: 'Мои коллабы', value: stats.proposalsSent, icon: Users, color: 'text-cyan-400' },
           { label: 'Общие голоса', value: collabRequests.reduce((s, c) => s + c.votes, 0), icon: ThumbsUp, color: 'text-blue-400' },
           { label: 'Собрано', value: stats.totalEarnings.toLocaleString() + '₽', icon: DollarSign, color: 'text-green-400' },
           { label: 'Подписчики', value: stats.totalFollowers, icon: Bell, color: 'text-[var(--color-accent)]' },
@@ -34,7 +34,7 @@ export default function DashboardPage() {
             const fundPct = Math.round((c.funded / c.goal) * 100);
             return (
               <Link key={c.id} to={`/collab/${c.id}`}
-                className="block bg-[var(--color-surface)] border border-white/10 rounded-xl p-4 hover:border-purple-500/30 transition-colors"
+                className="block bg-[var(--color-surface)] border border-white/10 rounded-xl p-4 hover:border-cyan-500/30 transition-colors"
               >
                 <div className="flex items-start justify-between mb-2">
                   <div>
@@ -43,7 +43,7 @@ export default function DashboardPage() {
                       c.status === 'proposed' ? 'bg-yellow-500/15 text-yellow-300' :
                       c.status === 'confirmed' ? 'bg-green-500/15 text-green-300' :
                       c.status === 'declined' ? 'bg-white/10 text-white/50' :
-                      'bg-purple-500/15 text-purple-300'
+                      'bg-cyan-500/15 text-cyan-300'
                     }`}>{c.status}</span>
                   </div>
                   <div className="text-right">
@@ -77,7 +77,7 @@ export default function DashboardPage() {
           ].map((a, i) => (
             <div key={i} className="flex items-center gap-3 py-2 px-3 rounded-lg bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
               <div className={`w-2 h-2 rounded-full shrink-0 ${
-                a.type === 'vote' ? 'bg-purple-400' :
+                a.type === 'vote' ? 'bg-cyan-400' :
                 a.type === 'predict' ? 'bg-blue-400' :
                 a.type === 'fund' ? 'bg-green-400' :
                 a.type === 'milestone' ? 'bg-[var(--color-accent)]' :

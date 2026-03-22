@@ -7,7 +7,7 @@ const statusConfig = {
   accepted: { label: 'Принято', color: 'bg-blue-500/15 text-blue-300' },
   declined: { label: 'Отклонено', color: 'bg-white/10 text-[var(--color-text-secondary)]' },
   confirmed: { label: 'Дата назначена', color: 'bg-green-500/15 text-green-300' },
-  open: { label: 'Ищет участника', color: 'bg-purple-500/15 text-purple-300' },
+  open: { label: 'Ищет участника', color: 'bg-cyan-500/15 text-cyan-300' },
 };
 
 export default function CollabCard({ collab, featured = false }) {
@@ -22,12 +22,12 @@ export default function CollabCard({ collab, featured = false }) {
 
   return (
     <Link to={`/collab/${collab.id}`}
-      className={`block bg-[var(--color-surface)] border border-white/10 rounded-2xl transition-all hover:border-purple-500/30 hover:shadow-xl hover:scale-[1.01] ${featured ? 'p-6' : 'p-5'}`}
+      className={`block bg-[var(--color-surface)] border border-white/10 rounded-2xl transition-all hover:border-cyan-500/30 hover:shadow-xl hover:scale-[1.01] ${featured ? 'p-6' : 'p-5'}`}
     >
       {/* ЛИЦА И ИМЕНА — ГЛАВНЫЙ ЭЛЕМЕНТ */}
       <div className="flex items-center gap-4 mb-4">
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <img src={collab.person1?.avatar} alt="" className={`${featured ? 'w-14 h-14' : 'w-12 h-12'} rounded-2xl ring-2 ring-purple-500/20 shrink-0`} />
+          <img src={collab.person1?.avatar} alt="" className={`${featured ? 'w-14 h-14' : 'w-12 h-12'} rounded-2xl ring-2 ring-cyan-500/20 shrink-0`} />
           <div className="min-w-0">
             <p className={`text-white font-bold truncate ${featured ? 'text-lg' : ''}`}>{collab.person1?.name}</p>
             <p className="text-[10px] text-[var(--color-text-secondary)] truncate">{collab.person1?.bio?.slice(0, 40)}</p>
@@ -36,7 +36,7 @@ export default function CollabCard({ collab, featured = false }) {
         <span className="text-[var(--color-text-secondary)] text-lg shrink-0">&</span>
         {collab.person2 ? (
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            <img src={collab.person2?.avatar} alt="" className={`${featured ? 'w-14 h-14' : 'w-12 h-12'} rounded-2xl ring-2 ring-purple-500/20 shrink-0`} />
+            <img src={collab.person2?.avatar} alt="" className={`${featured ? 'w-14 h-14' : 'w-12 h-12'} rounded-2xl ring-2 ring-cyan-500/20 shrink-0`} />
             <div className="min-w-0">
               <p className={`text-white font-bold truncate ${featured ? 'text-lg' : ''}`}>{collab.person2?.name}</p>
               <p className="text-[10px] text-[var(--color-text-secondary)] truncate">{collab.person2?.bio?.slice(0, 40)}</p>
@@ -48,8 +48,8 @@ export default function CollabCard({ collab, featured = false }) {
               <span className="text-white/30 text-lg">?</span>
             </div>
             <div>
-              <p className="text-purple-300 font-medium text-sm">Ищет собеседника</p>
-              <p className="text-[10px] text-purple-400">Откликнуться →</p>
+              <p className="text-cyan-300 font-medium text-sm">Ищет собеседника</p>
+              <p className="text-[10px] text-cyan-400">Откликнуться →</p>
             </div>
           </div>
         )}
@@ -94,7 +94,7 @@ export default function CollabCard({ collab, featured = false }) {
             <span className="text-[var(--color-text-secondary)]">{collab.votes}/{next.votes}</span>
           </div>
           <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-            <div className="h-full bg-purple-500/60 rounded-full transition-all" style={{ width: `${mProgress}%` }} />
+            <div className="h-full bg-cyan-500/60 rounded-full transition-all" style={{ width: `${mProgress}%` }} />
           </div>
         </div>
       )}
@@ -106,7 +106,7 @@ export default function CollabCard({ collab, featured = false }) {
           <span className={`font-bold ${fundingPct >= 100 ? 'text-green-400' : 'text-[var(--color-accent)]'}`}>{fundingPct}%</span>
         </div>
         <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-          <div className={`h-full rounded-full ${fundingPct >= 100 ? 'bg-linear-to-r from-green-500 to-emerald-400' : 'bg-linear-to-r from-purple-500 to-[var(--color-accent)]'}`}
+          <div className={`h-full rounded-full ${fundingPct >= 100 ? 'bg-linear-to-r from-green-500 to-emerald-400' : 'bg-linear-to-r from-cyan-500 to-[var(--color-accent)]'}`}
             style={{ width: `${Math.min(fundingPct, 100)}%` }} />
         </div>
       </div>
@@ -133,7 +133,7 @@ export default function CollabCard({ collab, featured = false }) {
               <TrendingUp className="w-3.5 h-3.5" />+{collab.velocityPerHour}/ч
             </span>
           )}
-          <span className="flex items-center gap-1 text-purple-300 font-medium">
+          <span className="flex items-center gap-1 text-cyan-300 font-medium">
             <Share2 className="w-3.5 h-3.5" />{collab.totalShares}
           </span>
         </div>

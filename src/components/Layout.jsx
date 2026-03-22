@@ -17,7 +17,7 @@ export default function Layout() {
       <header className="sticky top-0 z-50 bg-[var(--color-bg)]/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-linear-to-br from-purple-500 to-[var(--color-accent)] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-linear-to-br from-cyan-500 to-[var(--color-accent)] flex items-center justify-center">
               <Radio className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-white">
@@ -36,13 +36,13 @@ export default function Layout() {
           </nav>
 
           <div className="flex items-center gap-3">
-            {location.pathname !== '/marketplace' && (
-              <Link to="/marketplace"
-                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-linear-to-r from-purple-600 to-purple-500 text-white text-sm font-medium hover:opacity-90 transition-opacity"
-              >
-                + Предложить коллаб
-              </Link>
-            )}
+            <Link to="/marketplace"
+              className={`hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-linear-to-r from-cyan-600 to-cyan-500 text-white text-sm font-medium hover:opacity-90 transition-opacity ${
+                location.pathname === '/marketplace' ? 'invisible' : ''
+              }`}
+            >
+              + Предложить коллаб
+            </Link>
             <button onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden p-2 text-[var(--color-text-secondary)] hover:text-white"
             >

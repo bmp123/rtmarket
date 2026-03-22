@@ -41,7 +41,7 @@ export default function CollabDetailPage() {
           collab.status === 'confirmed' ? 'bg-green-500/15 text-green-300' :
           collab.status === 'declined' ? 'bg-white/10 text-[var(--color-text-secondary)]' :
           collab.status === 'proposed' ? 'bg-yellow-500/15 text-yellow-300' :
-          collab.status === 'open' ? 'bg-purple-500/15 text-purple-300' :
+          collab.status === 'open' ? 'bg-cyan-500/15 text-cyan-300' :
           'bg-blue-500/15 text-blue-300'
         }`}>{statusLabels[collab.status]}</span>
         {daysLeft !== null && collab.status === 'proposed' && (
@@ -68,7 +68,7 @@ export default function CollabDetailPage() {
         <div className="flex items-center justify-center gap-8">
           {collab.person1 && (
             <Link to={`/profile/${collab.person1.id}`} className="text-center group">
-              <img src={collab.person1.avatar} alt="" className="w-24 h-24 rounded-2xl ring-2 ring-purple-500/20 mx-auto mb-2 group-hover:ring-purple-500/50 transition-all" />
+              <img src={collab.person1.avatar} alt="" className="w-24 h-24 rounded-2xl ring-2 ring-cyan-500/20 mx-auto mb-2 group-hover:ring-cyan-500/50 transition-all" />
               <p className="text-white font-bold text-lg">{collab.person1.name}</p>
               <p className="text-xs text-[var(--color-text-secondary)]">{collab.person1.bio?.slice(0, 50)}</p>
             </Link>
@@ -76,7 +76,7 @@ export default function CollabDetailPage() {
           <div className="text-3xl text-[var(--color-text-secondary)]">&</div>
           {collab.person2 ? (
             <Link to={`/profile/${collab.person2.id}`} className="text-center group">
-              <img src={collab.person2.avatar} alt="" className="w-24 h-24 rounded-2xl ring-2 ring-purple-500/20 mx-auto mb-2 group-hover:ring-purple-500/50 transition-all" />
+              <img src={collab.person2.avatar} alt="" className="w-24 h-24 rounded-2xl ring-2 ring-cyan-500/20 mx-auto mb-2 group-hover:ring-cyan-500/50 transition-all" />
               <p className="text-white font-bold text-lg">{collab.person2.name}</p>
               <p className="text-xs text-[var(--color-text-secondary)]">{collab.person2.bio?.slice(0, 50)}</p>
             </Link>
@@ -85,8 +85,8 @@ export default function CollabDetailPage() {
               <div className="w-24 h-24 rounded-2xl bg-white/5 border-2 border-dashed border-white/20 mx-auto mb-2 flex items-center justify-center">
                 <span className="text-white/30 text-3xl">?</span>
               </div>
-              <p className="text-purple-300 font-medium">Ищет собеседника</p>
-              <button className="text-sm text-purple-400 hover:text-purple-300 mt-1">Откликнуться →</button>
+              <p className="text-cyan-300 font-medium">Ищет собеседника</p>
+              <button className="text-sm text-cyan-400 hover:text-cyan-300 mt-1">Откликнуться →</button>
             </div>
           )}
         </div>
@@ -101,7 +101,7 @@ export default function CollabDetailPage() {
             <div className="space-y-2">
               {collab.backstoryLinks.map((link, i) => (
                 <a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-purple-300 hover:text-purple-200 transition-colors">
+                  className="flex items-center gap-2 text-sm text-cyan-300 hover:text-cyan-200 transition-colors">
                   <ExternalLink className="w-4 h-4 shrink-0" />
                   {link.title}
                 </a>
@@ -168,7 +168,7 @@ export default function CollabDetailPage() {
               <span>До «{next.label}»</span><span>{voteCount}/{next.votes}</span>
             </div>
             <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-purple-500/50 rounded-full transition-all" style={{ width: `${mProgress}%` }} />
+              <div className="h-full bg-cyan-500/50 rounded-full transition-all" style={{ width: `${mProgress}%` }} />
             </div>
           </div>
         )}
@@ -194,8 +194,8 @@ export default function CollabDetailPage() {
           </div>
           <div className="mt-4 pt-4 border-t border-white/5 flex gap-2">
             <input type="text" placeholder="Написать комментарий..."
-              className="flex-1 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-purple-500/50" />
-            <button className="p-2 rounded-xl bg-purple-600 text-white hover:bg-purple-500 transition-colors"><Send className="w-4 h-4" /></button>
+              className="flex-1 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-cyan-500/50" />
+            <button className="p-2 rounded-xl bg-cyan-600 text-white hover:bg-cyan-500 transition-colors"><Send className="w-4 h-4" /></button>
           </div>
         </div>
       )}
@@ -211,7 +211,7 @@ export default function CollabDetailPage() {
           <span className="text-[var(--color-text-secondary)] pb-1">/ {collab.goal.toLocaleString()}₽</span>
         </div>
         <div className="h-3 bg-white/5 rounded-full overflow-hidden mb-4">
-          <div className={`h-full rounded-full ${fundingPct >= 100 ? 'bg-linear-to-r from-green-500 to-emerald-400' : 'bg-linear-to-r from-purple-500 to-[var(--color-accent)]'}`}
+          <div className={`h-full rounded-full ${fundingPct >= 100 ? 'bg-linear-to-r from-green-500 to-emerald-400' : 'bg-linear-to-r from-cyan-500 to-[var(--color-accent)]'}`}
             style={{ width: `${Math.min(fundingPct, 100)}%` }} />
         </div>
 
@@ -270,16 +270,16 @@ export default function CollabDetailPage() {
 
       {/* 🔗 REFERRAL LINK — заработай за привлечение */}
       {collab.referralBonus > 0 && (
-        <div className="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-6">
-          <h2 className="text-white font-bold mb-2 flex items-center gap-2"><Link2 className="w-5 h-5 text-purple-400" /> Заработай на коллабе</h2>
+        <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-2xl p-6">
+          <h2 className="text-white font-bold mb-2 flex items-center gap-2"><Link2 className="w-5 h-5 text-cyan-400" /> Заработай на коллабе</h2>
           <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-            Поделись своей реферальной ссылкой — получи <strong className="text-purple-300">{collab.referralBonus}₽</strong> за каждого, кто поддержит.
+            Поделись своей реферальной ссылкой — получи <strong className="text-cyan-300">{collab.referralBonus}₽</strong> за каждого, кто поддержит.
           </p>
           <div className="flex gap-2">
             <input type="text" readOnly value={refLink}
               className="flex-1 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs truncate" />
             <button onClick={handleRefCopy}
-              className="px-4 py-2 rounded-xl bg-purple-600 text-white text-sm font-medium hover:bg-purple-500 transition-colors whitespace-nowrap">
+              className="px-4 py-2 rounded-xl bg-cyan-600 text-white text-sm font-medium hover:bg-cyan-500 transition-colors whitespace-nowrap">
               {refCopied ? 'Скопировано!' : 'Копировать'}
             </button>
           </div>
@@ -291,14 +291,14 @@ export default function CollabDetailPage() {
       <div className="flex flex-wrap gap-3">
         <button onClick={handleVote}
           className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
-            voted ? 'bg-purple-500/20 text-purple-300' : 'bg-linear-to-r from-purple-600 to-purple-500 text-white hover:opacity-90'
+            voted ? 'bg-cyan-500/20 text-cyan-300' : 'bg-linear-to-r from-cyan-600 to-cyan-500 text-white hover:opacity-90'
           }`}>
           <ThumbsUp className="w-5 h-5" /> {voted ? 'Голос учтён' : 'Голосовать'} ({voteCount})
         </button>
 
         {/* ШЕРИНГ — ГЛАВНОЕ ДЕЙСТВИЕ */}
         <button onClick={handleShare}
-          className="flex items-center gap-2 px-6 py-3 rounded-xl bg-purple-500/20 border border-purple-500/30 text-purple-300 font-medium hover:bg-purple-500/30 transition-all">
+          className="flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-medium hover:bg-cyan-500/30 transition-all">
           <Share2 className="w-5 h-5" /> {shared ? 'Скопировано!' : `Поделиться (${collab.totalShares})`}
         </button>
 
@@ -334,7 +334,7 @@ export default function CollabDetailPage() {
         <div className="bg-[var(--color-surface)] border border-white/10 rounded-2xl p-6">
           <h2 className="text-white font-bold mb-2">Результат коллаборации</h2>
           <a href={collab.resultLink} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 text-purple-300 hover:text-purple-200">
+            className="flex items-center gap-2 text-cyan-300 hover:text-cyan-200">
             <ExternalLink className="w-5 h-5" /> Смотреть запись
           </a>
         </div>

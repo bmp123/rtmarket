@@ -19,7 +19,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="text-center py-8">
         <h1 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
-          Предложи <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-[var(--color-accent)]">коллабу</span>
+          Предложи <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-[var(--color-accent)]">коллабу</span>
           <br />любого с любым
         </h1>
         <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-6">
@@ -35,12 +35,12 @@ export default function HomePage() {
             <span><strong className="text-white">{totalFunded.toLocaleString()}₽</strong> собрано</span>
           </div>
           <div className="flex items-center gap-2 text-[var(--color-text-secondary)]">
-            <Share2 className="w-4 h-4 text-purple-400" />
+            <Share2 className="w-4 h-4 text-cyan-400" />
             <span><strong className="text-white">{totalShares.toLocaleString()}</strong> поделились</span>
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link to="/marketplace" className="px-6 py-3 rounded-xl bg-linear-to-r from-purple-600 to-purple-500 text-white font-medium hover:opacity-90 transition-opacity">
+          <Link to="/marketplace" className="px-6 py-3 rounded-xl bg-linear-to-r from-cyan-600 to-cyan-500 text-white font-medium hover:opacity-90 transition-opacity">
             Создать коллабу
           </Link>
           <Link to="/marketplace" className="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-[var(--color-text-secondary)] font-medium hover:text-white transition-colors">
@@ -77,7 +77,7 @@ export default function HomePage() {
       <section>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-white">Все коллабы</h2>
-          <Link to="/marketplace" className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300">
+          <Link to="/marketplace" className="flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300">
             Показать все <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

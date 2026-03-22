@@ -21,14 +21,14 @@ export default function ProfilePage() {
       {/* Profile header */}
       <div className="bg-[var(--color-surface)] border border-white/10 rounded-2xl p-6">
         <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-          <img src={person.avatar} alt={person.name} className="w-28 h-28 rounded-2xl ring-2 ring-purple-500/20" />
+          <img src={person.avatar} alt={person.name} className="w-28 h-28 rounded-2xl ring-2 ring-cyan-500/20" />
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-2xl font-black text-white mb-1">{person.name}</h1>
             <p className="text-[var(--color-text-secondary)] mb-4">{person.bio}</p>
 
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <div className="flex items-center gap-1 text-sm">
-                <Users className="w-4 h-4 text-purple-400" />
+                <Users className="w-4 h-4 text-cyan-400" />
                 <span className="text-white font-bold">{person.followers?.toLocaleString()}</span>
                 <span className="text-[var(--color-text-secondary)]">подписчиков</span>
               </div>
@@ -52,7 +52,7 @@ export default function ProfilePage() {
 
             <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
               {person.topics.map(t => (
-                <span key={t} className="text-xs px-3 py-1 rounded-full bg-purple-500/10 text-purple-300">#{t}</span>
+                <span key={t} className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300">#{t}</span>
               ))}
             </div>
           </div>
@@ -77,12 +77,12 @@ export default function ProfilePage() {
 
       {/* Open for collab */}
       {person.openForCollab && person.collabRequest && (
-        <div className="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-6">
+        <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-2xl p-6">
           <h2 className="text-white font-bold mb-2 flex items-center gap-2">
-            <ThumbsUp className="w-5 h-5 text-purple-400" /> Открыт к предложениям
+            <ThumbsUp className="w-5 h-5 text-cyan-400" /> Открыт к предложениям
           </h2>
           <p className="text-[var(--color-text-secondary)] mb-3">{person.collabRequest}</p>
-          <button className="px-6 py-2 rounded-xl bg-linear-to-r from-purple-600 to-purple-500 text-white font-medium hover:opacity-90 transition-opacity text-sm">
+          <button className="px-6 py-2 rounded-xl bg-linear-to-r from-cyan-600 to-cyan-500 text-white font-medium hover:opacity-90 transition-opacity text-sm">
             Предложить коллаб
           </button>
         </div>

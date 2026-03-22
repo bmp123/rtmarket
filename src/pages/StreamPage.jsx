@@ -10,7 +10,7 @@ export default function StreamPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
         <p className="text-[var(--color-text-secondary)] text-lg mb-4">Коллаб не найден</p>
-        <Link to="/marketplace" className="text-purple-400 hover:text-purple-300">← Маркетплейс</Link>
+        <Link to="/marketplace" className="text-cyan-400 hover:text-cyan-300">← Маркетплейс</Link>
       </div>
     );
   }
@@ -35,7 +35,7 @@ export default function StreamPage() {
             />
           </div>
           <a href={collab.resultLink} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-purple-300 hover:text-purple-200">
+            className="flex items-center gap-2 text-sm text-cyan-300 hover:text-cyan-200">
             <ExternalLink className="w-4 h-4" /> Смотреть на YouTube
           </a>
         </div>
@@ -45,7 +45,7 @@ export default function StreamPage() {
             {collab.scheduledDate ? (
               <>
                 <p className="text-white font-medium mb-1">Запланирован на</p>
-                <p className="text-2xl font-bold text-purple-300">
+                <p className="text-2xl font-bold text-cyan-300">
                   {new Date(collab.scheduledDate).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
                 </p>
               </>
