@@ -52,7 +52,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 text-xs text-[var(--color-text-secondary)]">
-                  <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{c.subscribers || 0} следят</span>
+                  <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{c.waiting || 0} ждут</span>
                   <span className="flex items-center gap-1"><DollarSign className="w-3 h-3" />{fundPct}% собрано</span>
                   {c.velocityPerHour > 5 && (
                     <span className="flex items-center gap-1 text-[var(--color-accent)]"><TrendingUp className="w-3 h-3" />+{c.velocityPerHour}/ч</span>

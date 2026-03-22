@@ -92,15 +92,23 @@ export const collabRequests = [
     id: 'c1',
     title: 'Стартапы: ценность или хайп?',
     description: 'Алексей утверждает, что предприниматели создают будущее. Дмитрий считает, что стартап-культура токсична. Кто прав?',
+    backstory: 'Спор начался после поста Алексея о "токсичных стартаперах". Дмитрий ответил разгромным видео. 3 месяца взаимных уколов.',
+    backstoryLinks: [
+      { title: 'Пост Алексея, с которого всё началось', url: 'https://youtube.com/watch?v=example1' },
+      { title: 'Ответ Дмитрия', url: 'https://youtube.com/watch?v=example2' },
+    ],
     person1: people[0],
     person2: people[2],
-    status: 'proposed', // proposed | accepted | declined | confirmed | open
+    roles: [
+      { type: 'organizer', name: 'Иван М.', reward: 2500 },
+    ],
+    status: 'proposed',
     votes: 234,
     funded: 12500,
     goal: 25000,
-    backers: 89,
-    subscribers: 412,
-    earlySupporters: 20, // макс 20 получают бейдж
+    paidVotes: 89,
+    waiting: 412,
+    earlySupporters: 20,
     earlySupportersClaimed: 20,
     topics: ['Бизнес', 'IT', 'Стартапы'],
     proposedBy: 'audience',
@@ -108,30 +116,34 @@ export const collabRequests = [
     responseDeadline: '2026-03-25T14:00:00',
     scheduledDate: null,
     comments: 18,
-    // Прогноз аудитории: примет / не примет
     predictions: { accept: 156, decline: 78 },
-    // Скорость: голосов за последний час
     velocityPerHour: 12,
-    // Публичная переписка
+    sponsor: null,
+    referralBonus: 50,
     discussion: [
       { date: '2026-03-18', who: people[0], text: 'С удовольствием. Дмитрий, принимаешь?' },
       { date: '2026-03-19', who: people[2], text: 'Дай мне пару дней — хочу подготовить данные.' },
     ],
-    // Shares
     totalShares: 89,
+    resultLink: null,
   },
   {
     id: 'c2',
     title: 'Дизайн vs маркетинг: что важнее для продукта?',
     description: 'Марина и Кирилл — два специалиста с противоположными позициями. Аудитория решит, кто убедительнее.',
+    backstory: 'Марина написала статью "Маркетинг убивает продукт". Кирилл ответил тредом из 40 твитов. Интернет разделился.',
+    backstoryLinks: [
+      { title: 'Статья Марины', url: 'https://youtube.com/watch?v=example3' },
+    ],
     person1: people[1],
     person2: people[4],
+    roles: [],
     status: 'accepted',
     votes: 478,
     funded: 8300,
     goal: 15000,
-    backers: 52,
-    subscribers: 621,
+    paidVotes: 52,
+    waiting: 621,
     earlySupporters: 20,
     earlySupportersClaimed: 20,
     topics: ['Дизайн', 'Маркетинг', 'Продукт'],
@@ -142,25 +154,34 @@ export const collabRequests = [
     comments: 43,
     predictions: { accept: 312, decline: 45 },
     velocityPerHour: 8,
+    sponsor: { name: 'Skillbox', logo: '🎓' },
+    referralBonus: 30,
     discussion: [
       { date: '2026-03-12', who: people[1], text: 'Кирилл, давай обсудим в прямом эфире?' },
       { date: '2026-03-13', who: people[4], text: 'Принято! Давай определим дату.' },
       { date: '2026-03-14', who: people[1], text: 'Предлагаю следующую среду.' },
     ],
     totalShares: 145,
+    resultLink: null,
   },
   {
     id: 'c3',
     title: 'Финансовая грамотность для IT-специалистов',
     description: 'Елена и Дмитрий разберут финансовые вопросы, с которыми сталкиваются разработчики.',
+    backstory: 'Тема родилась из опроса в Telegram — 89% разработчиков признались, что не разбираются в инвестициях.',
+    backstoryLinks: [],
     person1: people[3],
     person2: people[2],
+    roles: [
+      { type: 'organizer', name: 'Слава В.', reward: 3000 },
+      { type: 'referee', name: 'Максим К.', reward: 1500 },
+    ],
     status: 'confirmed',
     votes: 812,
     funded: 25000,
     goal: 25000,
-    backers: 156,
-    subscribers: 1340,
+    paidVotes: 156,
+    waiting: 1340,
     earlySupporters: 20,
     earlySupportersClaimed: 20,
     topics: ['Финансы', 'IT', 'Инвестиции'],
@@ -171,6 +192,8 @@ export const collabRequests = [
     comments: 67,
     predictions: { accept: 420, decline: 12 },
     velocityPerHour: 3,
+    sponsor: { name: 'Тинькофф', logo: '🏦' },
+    referralBonus: 40,
     discussion: [
       { date: '2026-03-05', who: people[3], text: 'Дмитрий, давай сделаем совместный эфир?' },
       { date: '2026-03-05', who: people[2], text: 'Тема важная, я за.' },
@@ -178,19 +201,28 @@ export const collabRequests = [
       { date: '2026-03-07', who: people[2], text: 'Подтверждаю!' },
     ],
     totalShares: 312,
+    resultLink: null,
   },
   {
     id: 'c4',
     title: 'Психология предпринимательства',
-    description: 'Аудитория предложила коллаб Ольги и Алексея. Ольга пока думает — 1203 человека ждут ответа.',
+    description: 'Аудитория предложила коллаб Ольги и Алексея. Ольга отказала — 1203 человека ждут пересмотра.',
+    backstory: 'Алексей в подкасте заявил: "Психологи не понимают бизнес". Ольга ответила в сторис: "Бизнесмены не понимают себя". Фанаты обоих требуют встречи.',
+    backstoryLinks: [
+      { title: 'Подкаст Алексея (момент на 14:32)', url: 'https://youtube.com/watch?v=example4' },
+      { title: 'Ответ Ольги в сторис', url: 'https://youtube.com/watch?v=example5' },
+    ],
     person1: people[5],
     person2: people[0],
+    roles: [
+      { type: 'recruiter', name: 'Юра Г.', reward: 5000 },
+    ],
     status: 'declined',
     votes: 892,
     funded: 18000,
     goal: 20000,
-    backers: 347,
-    subscribers: 1203,
+    paidVotes: 347,
+    waiting: 1203,
     earlySupporters: 20,
     earlySupportersClaimed: 20,
     topics: ['Психология', 'Бизнес', 'Саморазвитие'],
@@ -201,25 +233,33 @@ export const collabRequests = [
     comments: 234,
     predictions: { accept: 234, decline: 658 },
     velocityPerHour: 24,
+    sponsor: null,
+    referralBonus: 75,
     discussion: [
       { date: '2026-03-15', who: people[0], text: 'Ольга, интересная идея. Я готов.' },
       { date: '2026-03-20', who: people[5], text: 'Спасибо, но сейчас не готова к этому формату.' },
       { date: '2026-03-20', who: people[0], text: 'Жаль. Если передумаете — предложение в силе.' },
     ],
     totalShares: 478,
+    resultLink: null,
   },
   {
     id: 'c5',
     title: 'Крипторынок: перспективы или иллюзии?',
     description: 'Елена ищет собеседника из мира крипты. Пока никто не откликнулся — может быть, вы?',
+    backstory: 'Елена неделю назад опубликовала разбор: "Почему 95% крипто-проектов — скам". Крипто-комьюнити бурлит.',
+    backstoryLinks: [
+      { title: 'Разбор Елены', url: 'https://youtube.com/watch?v=example6' },
+    ],
     person1: people[3],
     person2: null,
+    roles: [],
     status: 'open',
     votes: 567,
     funded: 9200,
     goal: 15000,
-    backers: 203,
-    subscribers: 891,
+    paidVotes: 203,
+    waiting: 891,
     earlySupporters: 20,
     earlySupportersClaimed: 18,
     topics: ['Крипто', 'Финансы'],
@@ -230,23 +270,29 @@ export const collabRequests = [
     comments: 89,
     predictions: { accept: 0, decline: 0 },
     velocityPerHour: 15,
+    sponsor: null,
+    referralBonus: 60,
     discussion: [
       { date: '2026-03-17', who: people[3], text: 'Ищу сторонника крипты для открытой дискуссии.' },
     ],
     totalShares: 201,
+    resultLink: null,
   },
   {
     id: 'c6',
     title: 'Маркетинг: наука или интуиция?',
-    description: 'Кирилл ищет оппонента. 567 подписчиков следят за развитием.',
+    description: 'Кирилл ищет оппонента. 567 человек ждут эфира.',
+    backstory: 'Кирилл бросил вызов всем, кто считает маркетинг "не наукой". Пока никто не принял.',
+    backstoryLinks: [],
     person1: people[4],
     person2: null,
+    roles: [],
     status: 'proposed',
     votes: 145,
     funded: 6700,
     goal: 12000,
-    backers: 78,
-    subscribers: 567,
+    paidVotes: 78,
+    waiting: 567,
     earlySupporters: 20,
     earlySupportersClaimed: 11,
     topics: ['Маркетинг', 'Продукт', 'Growth'],
@@ -257,10 +303,13 @@ export const collabRequests = [
     comments: 34,
     predictions: { accept: 67, decline: 23 },
     velocityPerHour: 5,
+    sponsor: null,
+    referralBonus: 35,
     discussion: [
       { date: '2026-03-19', who: people[4], text: 'Ищу того, кто считает маркетинг — не наукой.' },
     ],
     totalShares: 56,
+    resultLink: null,
   },
 ];
 
@@ -305,10 +354,11 @@ export function calcEngagement(collab) {
   const v = collab.votes / 100;
   const f = (collab.funded / collab.goal) * 3;
   const c = collab.comments / 10;
-  const s = (collab.subscribers || 0) / 100;
+  const w = (collab.waiting || 0) / 100;
   const vel = (collab.velocityPerHour || 0) / 5;
+  const sh = (collab.totalShares || 0) / 50;
   const boost = collab.status === 'declined' ? 2.5 : collab.status === 'open' ? 1.3 : 1;
-  return Math.round((v + f + c + s + vel) * boost);
+  return Math.round((v + f + c + w + vel + sh) * boost);
 }
 
 // Дней до дедлайна
