@@ -1,342 +1,266 @@
 // RadioTube — маркетплейс коллабораций
-// Любой с любым. Инструмент нейтральный.
-// Механики подогрева: таймеры ответа, голоса аудитории, сбор средств, публичная переписка, подписки на обновления.
+// Механики подогрева интереса:
+// 1. Обратный отсчёт ответа (таймер на карточке)
+// 2. Прогноз аудитории: «Примет / Не примет» (голосование-ставка)
+// 3. Milestone-разблокировки (50→обсуждение, 200→обязан ответить, 500→топ)
+// 4. Ранние сторонники (первые 20 получают бейдж)
+// 5. Волна: скорость голосов/час (momentum)
+// 6. Share-трекинг (ты привёл N человек)
+// 7. Публичный response rate
 
 export const people = [
   {
-    id: 'a1',
-    name: 'Алексей Навигатор',
+    id: 'a1', name: 'Алексей Навигатор',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex',
     bio: 'Предприниматель, основатель 3 стартапов.',
     topics: ['Бизнес', 'Стартапы', 'Инвестиции'],
-    formats: ['Интервью', 'Дискуссия', 'Live Q&A'],
-    followers: 12400,
-    totalStreams: 87,
-    rating: 4.8,
-    isLive: true,
+    followers: 12400, rating: 4.8,
     openForCollab: true,
     collabRequest: 'Ищу собеседника для разговора о том, что маркетинг переоценён',
-    socials: { youtube: 'https://youtube.com', telegram: 'https://t.me' },
-    proposalsSent: 5,
-    proposalsReceived: 8,
     responseRate: 85,
+    proposalsReceived: 8,
   },
   {
-    id: 'a2',
-    name: 'Марина Дизайн',
+    id: 'a2', name: 'Марина Дизайн',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=marina',
     bio: 'UX/UI дизайнер, 10 лет в индустрии.',
     topics: ['Дизайн', 'UX', 'Фриланс'],
-    formats: ['Мастер-класс', 'Разбор', 'Дискуссия'],
-    followers: 8700,
-    totalStreams: 54,
-    rating: 4.9,
-    isLive: false,
+    followers: 8700, rating: 4.9,
     openForCollab: true,
     collabRequest: 'Хочу обсудить, правда ли дизайн важнее маркетинга',
-    socials: { youtube: 'https://youtube.com', telegram: 'https://t.me' },
-    proposalsSent: 3,
-    proposalsReceived: 6,
     responseRate: 100,
+    proposalsReceived: 6,
   },
   {
-    id: 'a3',
-    name: 'Дмитрий Кодер',
+    id: 'a3', name: 'Дмитрий Кодер',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=dmitry',
     bio: 'Fullstack-разработчик, критикую стартап-культуру.',
     topics: ['Программирование', 'IT', 'Карьера в IT'],
-    formats: ['Live-кодинг', 'Дискуссия', 'Интервью'],
-    followers: 15200,
-    totalStreams: 120,
-    rating: 4.7,
-    isLive: true,
+    followers: 15200, rating: 4.7,
     openForCollab: true,
     collabRequest: 'Жду предпринимателя, который расскажет в чём ценность стартапов',
-    socials: { youtube: 'https://youtube.com', telegram: 'https://t.me' },
-    proposalsSent: 7,
-    proposalsReceived: 4,
     responseRate: 92,
+    proposalsReceived: 4,
   },
   {
-    id: 'a4',
-    name: 'Елена Финансы',
+    id: 'a4', name: 'Елена Финансы',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=elena',
     bio: 'Финансовый консультант, скептик крипто-рынка.',
     topics: ['Финансы', 'Инвестиции', 'Крипто'],
-    formats: ['Подкаст', 'Live Q&A', 'Дебаты'],
-    followers: 9800,
-    totalStreams: 42,
-    rating: 4.6,
-    isLive: false,
+    followers: 9800, rating: 4.6,
     openForCollab: true,
     collabRequest: 'Ищу сторонника крипты для совместного эфира',
-    socials: { youtube: 'https://youtube.com', telegram: 'https://t.me' },
-    proposalsSent: 4,
-    proposalsReceived: 9,
     responseRate: 78,
+    proposalsReceived: 9,
   },
   {
-    id: 'a5',
-    name: 'Кирилл Маркетинг',
+    id: 'a5', name: 'Кирилл Маркетинг',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=kirill',
     bio: 'Growth-маркетолог, ex-Яндекс.',
     topics: ['Маркетинг', 'Growth', 'Продукт'],
-    formats: ['Подкаст', 'Дискуссия', 'Кейс-разбор'],
-    followers: 6300,
-    totalStreams: 31,
-    rating: 4.5,
-    isLive: false,
+    followers: 6300, rating: 4.5,
     openForCollab: true,
     collabRequest: 'Предлагаю обсудить: маркетинг — наука или интуиция?',
-    socials: { youtube: 'https://youtube.com', telegram: 'https://t.me' },
-    proposalsSent: 2,
-    proposalsReceived: 5,
     responseRate: 60,
+    proposalsReceived: 5,
   },
   {
-    id: 'a6',
-    name: 'Ольга Психология',
+    id: 'a6', name: 'Ольга Психология',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=olga',
     bio: 'Психолог, коуч. Интересует пересечение психологии и бизнеса.',
-    topics: ['Психология', 'Отношения', 'Саморазвитие'],
-    formats: ['Live Q&A', 'Дебаты', 'Подкаст'],
-    followers: 11500,
-    totalStreams: 68,
-    rating: 4.9,
-    isLive: false,
+    topics: ['Психология', 'Саморазвитие'],
+    followers: 11500, rating: 4.9,
     openForCollab: false,
     collabRequest: '',
-    socials: { youtube: 'https://youtube.com', telegram: 'https://t.me' },
-    proposalsSent: 1,
-    proposalsReceived: 12,
     responseRate: 33,
+    proposalsReceived: 12,
   },
 ];
 
 export const authors = people;
 
+// Milestones — при каком кол-ве голосов что разблокируется
+export const milestones = [
+  { votes: 50, label: 'Открывается обсуждение', icon: '💬' },
+  { votes: 200, label: 'Участник обязан ответить', icon: '⏰' },
+  { votes: 500, label: 'Попадает в топ', icon: '🔥' },
+  { votes: 1000, label: 'Гарантированный эфир', icon: '🎯' },
+];
+
 export const collabRequests = [
   {
     id: 'c1',
     title: 'Стартапы: ценность или хайп?',
-    description: 'Алексей и Дмитрий обсудят, создают ли стартапы реальную ценность.',
+    description: 'Алексей утверждает, что предприниматели создают будущее. Дмитрий считает, что стартап-культура токсична. Кто прав?',
     person1: people[0],
     person2: people[2],
-    get author1() { return this.person1; },
-    get author2() { return this.person2; },
-    status: 'proposed',
+    status: 'proposed', // proposed | accepted | declined | confirmed | open
     votes: 234,
     funded: 12500,
     goal: 25000,
     backers: 89,
     subscribers: 412,
+    earlySupporters: 20, // макс 20 получают бейдж
+    earlySupportersClaimed: 20,
     topics: ['Бизнес', 'IT', 'Стартапы'],
     proposedBy: 'audience',
     proposedDate: '2026-03-18T14:00:00',
     responseDeadline: '2026-03-25T14:00:00',
     scheduledDate: null,
     comments: 18,
+    // Прогноз аудитории: примет / не примет
+    predictions: { accept: 156, decline: 78 },
+    // Скорость: голосов за последний час
+    velocityPerHour: 12,
+    // Публичная переписка
     discussion: [
       { date: '2026-03-18', who: people[0], text: 'С удовольствием. Дмитрий, принимаешь?' },
-      { date: '2026-03-19', who: people[2], text: 'Дай мне пару дней подумать — хочу подготовить данные.' },
+      { date: '2026-03-19', who: people[2], text: 'Дай мне пару дней — хочу подготовить данные.' },
     ],
+    // Shares
+    totalShares: 89,
   },
   {
     id: 'c2',
     title: 'Дизайн vs маркетинг: что важнее для продукта?',
-    description: 'Марина предложила Кириллу совместный эфир. Кто убедительнее?',
+    description: 'Марина и Кирилл — два специалиста с противоположными позициями. Аудитория решит, кто убедительнее.',
     person1: people[1],
     person2: people[4],
-    get author1() { return this.person1; },
-    get author2() { return this.person2; },
     status: 'accepted',
-    votes: 178,
+    votes: 478,
     funded: 8300,
     goal: 15000,
     backers: 52,
-    subscribers: 289,
+    subscribers: 621,
+    earlySupporters: 20,
+    earlySupportersClaimed: 20,
     topics: ['Дизайн', 'Маркетинг', 'Продукт'],
     proposedBy: 'a2',
-    proposedDate: '2026-03-15T10:00:00',
-    responseDeadline: '2026-03-22T10:00:00',
+    proposedDate: '2026-03-12T10:00:00',
+    responseDeadline: '2026-03-19T10:00:00',
     scheduledDate: null,
-    comments: 24,
+    comments: 43,
+    predictions: { accept: 312, decline: 45 },
+    velocityPerHour: 8,
     discussion: [
-      { date: '2026-03-15', who: people[1], text: 'Кирилл, давай обсудим это в прямом эфире?' },
-      { date: '2026-03-16', who: people[4], text: 'Принято. Когда удобно?' },
+      { date: '2026-03-12', who: people[1], text: 'Кирилл, давай обсудим в прямом эфире?' },
+      { date: '2026-03-13', who: people[4], text: 'Принято! Давай определим дату.' },
+      { date: '2026-03-14', who: people[1], text: 'Предлагаю следующую среду.' },
     ],
+    totalShares: 145,
   },
   {
     id: 'c3',
     title: 'Финансовая грамотность для IT-специалистов',
-    description: 'Елена и Дмитрий разберут финансовые вопросы для разработчиков.',
+    description: 'Елена и Дмитрий разберут финансовые вопросы, с которыми сталкиваются разработчики.',
     person1: people[3],
     person2: people[2],
-    get author1() { return this.person1; },
-    get author2() { return this.person2; },
     status: 'confirmed',
-    votes: 412,
+    votes: 812,
     funded: 25000,
     goal: 25000,
     backers: 156,
-    subscribers: 734,
+    subscribers: 1340,
+    earlySupporters: 20,
+    earlySupportersClaimed: 20,
     topics: ['Финансы', 'IT', 'Инвестиции'],
     proposedBy: 'mutual',
-    proposedDate: '2026-03-10T12:00:00',
+    proposedDate: '2026-03-05T12:00:00',
     responseDeadline: null,
     scheduledDate: '2026-03-28T19:00:00',
     comments: 67,
+    predictions: { accept: 420, decline: 12 },
+    velocityPerHour: 3,
     discussion: [
-      { date: '2026-03-10', who: people[3], text: 'Дмитрий, давай сделаем совместный эфир?' },
-      { date: '2026-03-10', who: people[2], text: 'Конечно, тема важная.' },
-      { date: '2026-03-12', who: people[3], text: 'Давай 28 марта в 19:00?' },
-      { date: '2026-03-12', who: people[2], text: 'Отлично, подтверждаю.' },
+      { date: '2026-03-05', who: people[3], text: 'Дмитрий, давай сделаем совместный эфир?' },
+      { date: '2026-03-05', who: people[2], text: 'Тема важная, я за.' },
+      { date: '2026-03-07', who: people[3], text: '28 марта в 19:00 — подходит?' },
+      { date: '2026-03-07', who: people[2], text: 'Подтверждаю!' },
     ],
+    totalShares: 312,
   },
   {
     id: 'c4',
-    title: 'Психология и предпринимательство',
-    description: 'Аудитория предложила совместный эфир Ольги и Алексея. Ольга пока не ответила.',
+    title: 'Психология предпринимательства',
+    description: 'Аудитория предложила коллаб Ольги и Алексея. Ольга пока думает — 1203 человека ждут ответа.',
     person1: people[5],
     person2: people[0],
-    get author1() { return this.person1; },
-    get author2() { return this.person2; },
     status: 'declined',
     votes: 892,
     funded: 18000,
     goal: 20000,
     backers: 347,
     subscribers: 1203,
+    earlySupporters: 20,
+    earlySupportersClaimed: 20,
     topics: ['Психология', 'Бизнес', 'Саморазвитие'],
     proposedBy: 'audience',
     proposedDate: '2026-03-14T09:00:00',
     responseDeadline: '2026-03-21T09:00:00',
     scheduledDate: null,
     comments: 234,
+    predictions: { accept: 234, decline: 658 },
+    velocityPerHour: 24,
     discussion: [
       { date: '2026-03-15', who: people[0], text: 'Ольга, интересная идея. Я готов.' },
-      { date: '2026-03-20', who: people[5], text: 'Спасибо за предложение, но сейчас не готова к этому формату.' },
+      { date: '2026-03-20', who: people[5], text: 'Спасибо, но сейчас не готова к этому формату.' },
       { date: '2026-03-20', who: people[0], text: 'Жаль. Если передумаете — предложение в силе.' },
     ],
+    totalShares: 478,
   },
   {
     id: 'c5',
     title: 'Крипторынок: перспективы или иллюзии?',
-    description: 'Елена ищет собеседника из мира крипты для открытой дискуссии.',
+    description: 'Елена ищет собеседника из мира крипты. Пока никто не откликнулся — может быть, вы?',
     person1: people[3],
     person2: null,
-    get author1() { return this.person1; },
-    get author2() { return this.person2; },
     status: 'open',
     votes: 567,
     funded: 9200,
     goal: 15000,
     backers: 203,
     subscribers: 891,
-    topics: ['Крипто', 'Финансы', 'Инвестиции'],
+    earlySupporters: 20,
+    earlySupportersClaimed: 18,
+    topics: ['Крипто', 'Финансы'],
     proposedBy: 'a4',
     proposedDate: '2026-03-17T16:00:00',
     responseDeadline: null,
     scheduledDate: null,
     comments: 89,
+    predictions: { accept: 0, decline: 0 },
+    velocityPerHour: 15,
     discussion: [
-      { date: '2026-03-17', who: people[3], text: 'Ищу того, кто верит в крипту и готов обсудить это в прямом эфире.' },
+      { date: '2026-03-17', who: people[3], text: 'Ищу сторонника крипты для открытой дискуссии.' },
     ],
+    totalShares: 201,
   },
   {
     id: 'c6',
-    title: 'Маркетинг: интуиция или система?',
-    description: 'Кирилл предложил несколько человек, но пока не нашёл собеседника.',
+    title: 'Маркетинг: наука или интуиция?',
+    description: 'Кирилл ищет оппонента. 567 подписчиков следят за развитием.',
     person1: people[4],
     person2: null,
-    get author1() { return this.person1; },
-    get author2() { return this.person2; },
     status: 'proposed',
-    votes: 445,
+    votes: 145,
     funded: 6700,
     goal: 12000,
-    backers: 178,
+    backers: 78,
     subscribers: 567,
+    earlySupporters: 20,
+    earlySupportersClaimed: 11,
     topics: ['Маркетинг', 'Продукт', 'Growth'],
     proposedBy: 'a5',
     proposedDate: '2026-03-19T11:00:00',
     responseDeadline: '2026-03-26T11:00:00',
     scheduledDate: null,
-    comments: 156,
+    comments: 34,
+    predictions: { accept: 67, decline: 23 },
+    velocityPerHour: 5,
     discussion: [
-      { date: '2026-03-19', who: people[4], text: 'Ищу того, кто считает маркетинг — не наукой. Давайте обсудим.' },
+      { date: '2026-03-19', who: people[4], text: 'Ищу того, кто считает маркетинг — не наукой.' },
     ],
-  },
-];
-
-export const liveStreams = [
-  {
-    id: 's1',
-    title: 'Как запустить стартап без инвестиций — живой разбор',
-    author: people[0],
-    viewers: 342,
-    startedAt: new Date(Date.now() - 45 * 60000).toISOString(),
-    topics: ['Бизнес', 'Стартапы'],
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    embedPlatform: 'YouTube',
-    isLive: true,
-    donations: 4500,
-    questions: 23,
-  },
-  {
-    id: 's2',
-    title: 'Пишем Telegram-бота на Python — live-кодинг',
-    author: people[2],
-    viewers: 187,
-    startedAt: new Date(Date.now() - 90 * 60000).toISOString(),
-    topics: ['Программирование', 'Python'],
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    embedPlatform: 'YouTube',
-    isLive: true,
-    donations: 2300,
-    questions: 15,
-  },
-];
-
-export const pastStreams = [
-  {
-    id: 'ps1',
-    title: 'Секреты UX-дизайна: разбор 5 реальных кейсов',
-    author: people[1],
-    viewers: 1250,
-    duration: '1:23:45',
-    date: '2026-03-20',
-    topics: ['Дизайн', 'UX'],
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    embedPlatform: 'YouTube',
-    donations: 8700,
-    thumbnail: 'https://picsum.photos/seed/ux1/640/360',
-  },
-  {
-    id: 'ps2',
-    title: '7 финансовых ошибок, которые совершают все',
-    author: people[3],
-    viewers: 980,
-    duration: '0:58:12',
-    date: '2026-03-19',
-    topics: ['Финансы', 'Инвестиции'],
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    embedPlatform: 'YouTube',
-    donations: 5400,
-    thumbnail: 'https://picsum.photos/seed/fin1/640/360',
-  },
-  {
-    id: 'ps3',
-    title: 'Growth-хаки: что реально работает в 2026',
-    author: people[4],
-    viewers: 760,
-    duration: '1:05:30',
-    date: '2026-03-18',
-    topics: ['Маркетинг', 'Growth'],
-    embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    embedPlatform: 'YouTube',
-    donations: 3200,
-    thumbnail: 'https://picsum.photos/seed/growth1/640/360',
+    totalShares: 56,
   },
 ];
 
@@ -351,26 +275,14 @@ export const topicSuggestions = [
   { id: 't8', name: 'Карьера', count: 221, emoji: '🚀' },
 ];
 
-export const chatMessages = [
-  { id: 'm1', user: 'Анна К.', text: 'Отличная тема, жду эфир!', time: '2 мин назад', type: 'message' },
-  { id: 'm2', user: 'Павел С.', text: 'А будет ли разбор реальных кейсов?', time: '1 мин назад', type: 'question' },
-  { id: 'm3', user: 'Иван М.', text: '', amount: 500, time: '1 мин назад', type: 'donation' },
-  { id: 'm4', user: 'Света Д.', text: 'Как начать инвестировать с нуля?', time: '30 сек назад', type: 'paid_question', amount: 200 },
-  { id: 'm5', user: 'Макс Р.', text: '👏👏👏', time: '15 сек назад', type: 'reaction' },
-  { id: 'm6', user: 'Олег Т.', text: 'Поддерживаю, хочу увидеть этот коллаб!', time: '10 сек назад', type: 'message' },
-];
-
 export const dashboardStats = {
   totalEarnings: 156700,
   monthEarnings: 34500,
-  totalViewers: 45200,
-  avgViewers: 285,
-  totalStreams: 87,
   totalFollowers: 12400,
   proposalsSent: 5,
   proposalsReceived: 8,
   responseRate: 85,
-  topDonators: [
+  topSupporters: [
     { name: 'Иван М.', total: 12500 },
     { name: 'Анна К.', total: 8700 },
     { name: 'Сергей П.', total: 6300 },
@@ -386,19 +298,41 @@ export const dashboardStats = {
   ],
 };
 
-// Утилита: рассчитать «интерес» к коллабу — чем выше, тем популярнее
+// ---- Утилиты ----
+
+// Интерес к коллабу (для сортировки)
 export function calcEngagement(collab) {
-  const votesScore = collab.votes / 100;
-  const fundingScore = (collab.funded / collab.goal) * 3;
-  const commentsScore = collab.comments / 10;
-  const subsScore = (collab.subscribers || 0) / 100;
-  const statusBoost = collab.status === 'declined' ? 2 : collab.status === 'open' ? 1.2 : 1;
-  return Math.round((votesScore + fundingScore + commentsScore + subsScore) * statusBoost);
+  const v = collab.votes / 100;
+  const f = (collab.funded / collab.goal) * 3;
+  const c = collab.comments / 10;
+  const s = (collab.subscribers || 0) / 100;
+  const vel = (collab.velocityPerHour || 0) / 5;
+  const boost = collab.status === 'declined' ? 2.5 : collab.status === 'open' ? 1.3 : 1;
+  return Math.round((v + f + c + s + vel) * boost);
 }
 
-// Утилита: сколько дней осталось до дедлайна ответа
+// Дней до дедлайна
 export function daysUntilDeadline(collab) {
   if (!collab.responseDeadline) return null;
   const diff = new Date(collab.responseDeadline) - new Date();
   return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+}
+
+// Следующий milestone
+export function nextMilestone(votes) {
+  return milestones.find(m => votes < m.votes) || null;
+}
+
+// Прогресс до milestone в %
+export function milestoneProgress(votes) {
+  const next = nextMilestone(votes);
+  if (!next) return 100;
+  const prev = milestones[milestones.indexOf(next) - 1];
+  const from = prev ? prev.votes : 0;
+  return Math.round(((votes - from) / (next.votes - from)) * 100);
+}
+
+// Достигнутые milestones
+export function achievedMilestones(votes) {
+  return milestones.filter(m => votes >= m.votes);
 }
